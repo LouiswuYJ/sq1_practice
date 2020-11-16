@@ -1,24 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<% if current_user %>
+  Logged in as <%= current_user.email %>.
+  <%= link_to "Log Out", logout_path %>
+  <p id="notice"><%= notice %></p>
+  <h1><%= current_user.name %></h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= current_user.email %>
+  </p>
 
-<p>
-  <strong>Birthday:</strong>
-  <%= @user.birthday %>
-</p>
+  <p>
+    <strong>Birthday:</strong>
+    <%= current_user.birthday %>
+  </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @user.address %>
-</p>
+  <p>
+    <strong>Address:</strong>
+    <%= current_user.address %>
+  </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Edit', edit_user_path(current_user) %>
+<% else %>
+  <%= link_to "Sign Up", signup_path %>
+  <%= link_to "Log In", login_path %>
+<% end %>
+
 <%= link_to 'Back', users_path %>
